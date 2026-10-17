@@ -16,21 +16,33 @@ interface DemoUser {
   role: UserRole;
 }
 
-function demoUsers(): DemoUser[] {
-  return [
+/**
+ * Accounts come ONLY from server-only environment variables
+ * (RAKEB_ADMIN_EMAIL/PASSWORD, RAKEB_EDITOR_EMAIL/PASSWORD).
+ * There is deliberately NO default or fallback password anywhere in code:
+ * an account without explicitly configured env credentials cannot sign in
+ * (fail closed). See docs/OPERATIONS.md for the safe setup procedure.
+ */
+function configuredUsers(): DemoUser[] {
+  const candidates: DemoUser[] = [
     {
-      email: process.env.RAKEB_ADMIN_EMAIL ?? 'admin@rakeb.app',
-      password: process.env.RAKEB_ADMIN_PASSWORD ?? 'Rakeb#2026',
+      email: process.env.RAKEB_ADMIN_EMAIL ?? '',
+      password: process.env.RAKEB_ADMIN_PASSWORD ?? '',
       name: 'مدير البيانات',
       role: 'admin',
     },
     {
-      email: process.env.RAKEB_EDITOR_EMAIL ?? 'editor@rakeb.app',
-      password: process.env.RAKEB_EDITOR_PASSWORD ?? 'Rakeb#2026',
+      email: process.env.RAKEB_EDITOR_EMAIL ?? '',
+      password: process.env.RAKEB_EDITOR_PASSWORD ?? '',
       name: 'محرر البيانات',
       role: 'editor',
     },
   ];
+  return candidates.filter((u) => u.email && u.password);
+}
+
+export function adminConfigured(): boolean {
+  return configuredUsers().length > 0;
 }
 
 function digest(value: string): Buffer {
@@ -43,27 +55,8 @@ function safeEqual(a: string, b: string): boolean {
   return left.length === right.length && timingSafeEqual(left, right);
 }
 
-export function demoCredentials() {
-  return [
-    {
-      role: 'admin' as const,
-      email: process.env.RAKEB_ADMIN_EMAIL ?? 'admin@rakeb.app',
-      password: process.env.RAKEB_ADMIN_PASSWORD ?? 'Rakeb#2026',
-      labelAr: 'مدير البيانات — يعتمد وينشر',
-      labelEn: 'Data manager — can approve and publish',
-    },
-    {
-      role: 'editor' as const,
-      email: process.env.RAKEB_EDITOR_EMAIL ?? 'editor@rakeb.app',
-      password: process.env.RAKEB_EDITOR_PASSWORD ?? 'Rakeb#2026',
-      labelAr: 'محرر البيانات — ينشئ طلبات التعديل',
-      labelEn: 'Data editor — creates change requests',
-    },
-  ];
-}
-
 export function authenticate(email: string, password: string): AdminSession | null {
-  const user = demoUsers().find((candidate) => candidate.email.toLowerCase() === email.trim().toLowerCase());
+  const user = configuredUsers().find((candidate) => candidate.email.toLowerCase() === email.trim().toLowerCase());
   if (!user || !safeEqual(user.password, password)) return null;
   return {
     name: user.name,

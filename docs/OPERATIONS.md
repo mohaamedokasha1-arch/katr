@@ -110,3 +110,17 @@ published data stays live.
 - [ ] Confirm SSE board updates within 25 seconds
 - [ ] Verify `sitemap.xml` count and `robots.txt` disallows
 - [ ] Dark mode and English toggle spot check on home, search and trip pages
+
+
+## Secure admin setup (required before any production use)
+
+1. Generate unique secrets on the server/hosting env (never in code/git):
+   `openssl rand -hex 32` for `RAKEB_AUTH_SECRET`, and a unique strong
+   password per account for `RAKEB_ADMIN_PASSWORD` / `RAKEB_EDITOR_PASSWORD`
+   (with matching `RAKEB_*_EMAIL`), plus `RAKEB_REPORT_SALT`.
+2. The previously committed demo password (`Rakeb#2026`, present in git
+   history) must be treated as COMPROMISED and never reused anywhere.
+3. With env vars unset, admin sign-in fails closed and `/api/admin/*`
+   returns 401; the login page displays no credentials.
+4. Keep `RAKEB_ENABLE_DEMO_SEED` unset/`0` in production so no fabricated
+   delays, cancellations, reports or sync runs are shown as real.

@@ -25,6 +25,7 @@ import { StatusBadge } from '@/components/ui/StatusBadge';
 import { ConfidenceBadge } from '@/components/ui/ConfidenceBadge';
 import { LiveClock, LiveRefresher } from '@/components/trip/LiveBits';
 import { cn } from '@/lib/utils';
+import { DATA_SOURCES } from '@/lib/data/sources';
 
 export const dynamic = 'force-dynamic';
 
@@ -324,6 +325,28 @@ export default async function StatusPage() {
             ? 'الحالة تعتمد على الجدول المنشور وبلاغات الركاب المؤكدة. صلاحية الشاشة تتجدد تلقائيًا، ويمكن أن تختلف عن الإعلان الرسمي داخل المحطة.'
             : 'Status combines the published timetable and confirmed rider reports. The screen refreshes automatically and may differ from the official on-station announcement.'}
         </p>
+        <section className="panel mt-4 p-4">
+          <h2 className="text-xs font-bold text-ink dark:text-white">{ar ? 'مصادر البيانات وحالتها' : 'Data sources & status'}</h2>
+          <p className="mt-1 text-[10px] leading-5 text-slate-400">
+            {ar
+              ? 'لا توجد مزامنة آلية حية حاليًا: المواعيد المعروضة جدول يدوي يحتاج إعادة تحقق، والتأخير/الإلغاء يظهر فقط بعد مراجعة ونشر إداري أو تأكيد ركاب. آخر تحقق لكل مصدر أدناه.'
+              : 'There is no live automated sync yet: displayed times are a manually maintained timetable needing re-verification, and delays/cancellations appear only after admin review or rider confirmation. Per-source verification dates below.'}
+          </p>
+          <ul className="mt-2 space-y-2">
+            {DATA_SOURCES.map((s) => (
+              <li key={s.id} className="flex flex-wrap items-baseline gap-x-2 text-[11px]">
+                <a href={s.url} target="_blank" rel="noopener noreferrer" className="font-semibold text-brand-700 underline-offset-2 hover:underline dark:text-brand-300">
+                  {ar ? s.ownerAr : s.ownerEn} ↗
+                </a>
+                <span className="text-slate-500 dark:text-slate-400">{ar ? s.dataAr : s.dataEn}</span>
+                <span className="rounded bg-slate-100 px-1.5 py-0.5 text-[9px] font-bold text-slate-600 dark:bg-white/10 dark:text-slate-300">
+                  {s.official ? (ar ? 'جهة رسمية' : 'Official body') : ar ? 'إدخال يدوي' : 'Manual'} · {s.access} · {s.status}
+                  {s.lastVerifiedIso ? ` · ${ar ? 'تحقق' : 'checked'} ${s.lastVerifiedIso}` : ar ? ' · لم يُتحقق بعد' : ' · not yet verified'}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </section>
       </div>
     </>
   );

@@ -118,8 +118,8 @@ export function LiveBoardFeed({
           <LiveSignalIcon className="h-3 w-3" animated={connection === 'live'} />
           {connection === 'live'
             ? ar
-              ? 'بث مباشر من الخادم'
-              : 'Live server stream'
+              ? 'تحديث تلقائي للمواعيد المجدولة (ليس بثًا تشغيليًا حيًا)'
+              : 'Auto-refreshed scheduled times (not a live operations feed)'
             : connection === 'polling'
               ? ar
                 ? 'بث غير متاح — تحديث دوري'

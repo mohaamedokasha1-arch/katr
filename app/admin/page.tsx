@@ -447,7 +447,7 @@ export default async function AdminPage({ searchParams }: { searchParams: Search
               <p className="text-[9px] leading-5 text-brand-100/40">
                 {ar
                   ? 'نسخة تجريبية: الحالة في ‎.data/state.json‎ وتتصفّر بمتغير RAKEB_RESET_STATE=1. الشاشة تعرض آخر 30 إجراءً و40 تعديلًا.'
-                  : 'Demo note: state lives in .data/state.json and resets with RAKEB_RESET_STATE=1. The console shows the latest 30 audit entries and 40 overrides.'}
+                  : 'State lives in .data/state.json (reset with RAKEB_RESET_STATE=1). Fabricated demo seed data is OFF unless RAKEB_ENABLE_DEMO_SEED=1. The console shows the latest 30 audit entries and 40 overrides.'}
               </p>
               <Link
                 href="/status"

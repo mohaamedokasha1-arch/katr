@@ -34,7 +34,13 @@ const bodySchema = z.object({
 function reporterHashFor(request: Request): string {
   const raw = clientFingerprint(request.headers);
   const day = new Date().toISOString().slice(0, 10);
-  const salt = process.env.RAKEB_REPORT_SALT ?? 'rakeb-demo-salt';
+  // No known/default salt: fall back to the server-only auth secret, and in
+  // production require an explicit RAKEB_REPORT_SALT (fail closed below).
+  const salt =
+    process.env.RAKEB_REPORT_SALT ??
+    process.env.RAKEB_AUTH_SECRET ??
+    (process.env.NODE_ENV === 'production' ? '' : 'rakeb-dev-only-salt');
+  if (!salt) throw new Error('RAKEB_REPORT_SALT is required in production.');
   return createHash('sha256').update(`${salt}:${day}:${raw}`).digest('hex').slice(0, 24);
 }
 

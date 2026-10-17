@@ -11,10 +11,14 @@ export const SESSION_COOKIE = 'rakeb_admin';
 const SESSION_TTL_SECONDS = 8 * 60 * 60;
 
 function secret(): string {
-  return (
-    process.env.RAKEB_AUTH_SECRET ??
-    'rakeb-dev-secret-change-me-please-32-characters'
-  );
+  const value = process.env.RAKEB_AUTH_SECRET;
+  if (value && value.length >= 32) return value;
+  // Never fall back to a known secret in production: signing/verifying
+  // must fail closed so forged sessions are impossible.
+  if (process.env.NODE_ENV === 'production') {
+    throw new Error('RAKEB_AUTH_SECRET (32+ chars) is required in production.');
+  }
+  return 'rakeb-dev-only-secret-not-for-production-32ch';
 }
 
 function toBase64Url(bytes: Uint8Array): string {

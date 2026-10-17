@@ -12,8 +12,16 @@ defines where data comes from, how it is promoted, and what riders are told.
 | C | Scraped public pages | Worker observations only | 🔵 standard, or 🟠 once confirmed |
 | D | Rider reports | Crowd consensus | 🟠 community (76) |
 
-The demo ships Tier A/B records as seed data and simulates Tier C through
-`workers/sync.ts`. Tier D is live through `/api/reports`.
+Current reality (audit 2026-10-17): the base timetable/fares in
+`lib/data/services.ts` are manually compiled records (see the machine-readable
+registry in `lib/data/sources.ts`, rendered on `/status`). No official ENR API
+or automated feed is connected, Tier C is NOT live, and fabricated demo
+delays/cancellations/reports/sync-runs are disabled by default
+(`RAKEB_ENABLE_DEMO_SEED=1` re-enables them for local review only).
+ENR's public schedule page is
+https://www.enr.gov.eg/Ar/TrainSchedule.aspx and official booking is
+https://obs.enr.gov.eg/o-city/obs/enr/railway/ar/booktickets — both are
+public pages, not APIs; do not scrape them without permission/terms review.
 
 ## 2. Promotion rules
 
