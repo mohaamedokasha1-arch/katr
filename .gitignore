@@ -1,0 +1,17 @@
+# deps
+node_modules/
+# next
+.next/
+out/
+# env
+.env
+.env*.local
+# state / runtime
+.data/
+# misc
+*.tsbuildinfo
+next-env.d.ts
+.DS_Store
+coverage/
+npm-debug.log*
+playwright-report/
