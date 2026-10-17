@@ -1,0 +1,211 @@
+import type { RailLine } from '@/types/rail';
+
+export const LINES: RailLine[] = [
+  {
+    id: 'delta-main',
+    slug: 'cairo-alexandria',
+    nameAr: 'القاهرة – الإسكندرية عبر طنطا',
+    nameEn: 'Cairo – Alexandria via Tanta',
+    shortAr: 'خط الدلتا الرئيسي',
+    shortEn: 'Main Delta',
+    color: '#1565C0',
+    regionAr: 'الدلتا',
+    regionEn: 'Delta',
+    descriptionAr:
+      'الشريان الأكثر ازدحامًا في الشبكة: يربط القاهرة ببنها وطنطا ودمنهور والإسكندرية، ويستوعب طيفًا واسعًا من القطارات بين تالجو والدرجات الاقتصادية. معظم الرحلات تتوقف في طنطا ودمنهور وسيدي جابر، وبعضها مباشر من القاهرة إلى الإسكندرية.',
+    descriptionEn:
+      'The busiest corridor in the network: Cairo to Banha, Tanta, Damanhour and Alexandria, serving everything from Talgo to economical third class. Most trains call at Tanta, Damanhour and Sidi Gaber; some run direct.',
+    stationIds: ['cairo-ramses', 'banha', 'tanta', 'kafr-el-zayat', 'damanhour', 'alexandria-sidi-gaber', 'alexandria-misr'],
+    seasonal: false,
+    sortOrder: 1,
+  },
+  {
+    id: 'delta-direct',
+    slug: 'cairo-alexandria-direct',
+    nameAr: 'القاهرة – الإسكندرية المباشر',
+    nameEn: 'Cairo – Alexandria direct',
+    shortAr: 'الدلتا المباشر',
+    shortEn: 'Direct Delta',
+    color: '#0B3D91',
+    regionAr: 'الدلتا',
+    regionEn: 'Delta',
+    descriptionAr:
+      'رحلات سريعة بدون توقفات وسط الطريق، تنطلق من رمسيس وتتوقف في سيدي جابر ثم محطة مصر بالإسكندرية. الخيار الأنسب لمن يريد الوصول في أقل زمن ممكن.',
+    descriptionEn:
+      'Fast, non-stop services from Ramses calling only at Sidi Gaber before Alexandria Misr — the quickest way between the two cities.',
+    stationIds: ['cairo-ramses', 'alexandria-sidi-gaber', 'alexandria-misr'],
+    seasonal: false,
+    sortOrder: 2,
+  },
+  {
+    id: 'upper-egypt',
+    slug: 'cairo-aswan',
+    nameAr: 'القاهرة – أسوان (خط الصعيد)',
+    nameEn: 'Cairo – Aswan (Upper Egypt)',
+    shortAr: 'خط الصعيد',
+    shortEn: 'Upper Egypt',
+    color: '#2E7D32',
+    regionAr: 'الصعيد',
+    regionEn: 'Upper Egypt',
+    descriptionAr:
+      'أطول خط في الشبكة، يمتد من رمسيس عبر الجيزة وبني سويف والمنيا وأسيوط وسوهاج وقنا والأقصر حتى أسوان. يضم قطارات النوم والدرجات المكيفة والثالثة، مع فروق كبيرة في زمن الرحلة حسب درجة القطار وعدد توقفاته.',
+    descriptionEn:
+      'The longest line in the network, running from Ramses through Giza, Beni Suef, Minya, Asyut, Sohag, Qena and Luxor to Aswan. It hosts sleepers, air-conditioned and third-class services with widely varying journey times.',
+    stationIds: [
+      'cairo-ramses',
+      'giza',
+      'beni-suef',
+      'minya',
+      'abu-qurqas',
+      'mallawi',
+      'manfalut',
+      'asyut',
+      'sohag',
+      'girga',
+      'farshut',
+      'qena',
+      'qift',
+      'luxor',
+      'edfu',
+      'kom-ombo',
+      'daraw',
+      'aswan',
+    ],
+    seasonal: false,
+    sortOrder: 3,
+  },
+  {
+    id: 'fayoum',
+    slug: 'cairo-fayoum',
+    nameAr: 'القاهرة – الفيوم',
+    nameEn: 'Cairo – Fayoum',
+    shortAr: 'خط الفيوم',
+    shortEn: 'Fayoum',
+    color: '#00897B',
+    regionAr: 'الفيوم',
+    regionEn: 'Fayoum',
+    descriptionAr:
+      'خط قصير منخفض التردد يخدم محافظات الفيوم والجيزة، ويمر بالوراق قبل أن يتجه جنوبًا إلى الفيوم. عدد الرحلات محدود، لذا يُنصح بالتحقق من موعد الرحلة قبل التوجه للمحطة.',
+    descriptionEn:
+      'A short, low-frequency line connecting Cairo, Giza and Fayoum via Al Warraq. With few daily services, checking the timetable before leaving is strongly advised.',
+    stationIds: ['cairo-ramses', 'giza', 'waraq', 'fayoum'],
+    seasonal: false,
+    sortOrder: 4,
+  },
+  {
+    id: 'canal-port-said',
+    slug: 'cairo-port-said',
+    nameAr: 'القاهرة – بورسعيد عبر الإسماعيلية',
+    nameEn: 'Cairo – Port Said via Ismailia',
+    shortAr: 'خط القناة الشرقي',
+    shortEn: 'East Canal',
+    color: '#00838F',
+    regionAr: 'القناة',
+    regionEn: 'Canal',
+    descriptionAr:
+      'خط يخدم الشرقية والإسماعيلية وبورسعيد عبر الزقازيق وأبو كبير وفاقوس، وتختلف رحلاته بين المكيف والدرجة الثالثة. زمن الرحلة يقارب أربع ساعات في الرحلات العادية.',
+    descriptionEn:
+      'A line serving Sharqia, Ismailia and Port Said via Zagazig, Abu Kabir and Faqous, with a mix of AC and third-class trains. Typical journeys take around four hours.',
+    stationIds: ['cairo-ramses', 'zagazig', 'abu-kabir', 'faqous', 'ismailia', 'port-said'],
+    seasonal: false,
+    sortOrder: 5,
+  },
+  {
+    id: 'canal-suez',
+    slug: 'cairo-suez',
+    nameAr: 'القاهرة – السويس',
+    nameEn: 'Cairo – Suez',
+    shortAr: 'خط السويس',
+    shortEn: 'Suez',
+    color: '#5E35B1',
+    regionAr: 'القناة',
+    regionEn: 'Canal',
+    descriptionAr:
+      'خط مباشر نسبيًا من رمسيس عبر الزقازيق وأبو حماد إلى السويس. رحلات محدودة يوميًا، ويُستخدم غالبًا للسفر العملي والتنقل بين المحافظات.',
+    descriptionEn:
+      'A reasonably direct line from Ramses through Zagazig and Abu Hammad to Suez, with a limited daily service aimed at commuters and practical travel.',
+    stationIds: ['cairo-ramses', 'zagazig', 'abu-hammad', 'suez'],
+    seasonal: false,
+    sortOrder: 6,
+  },
+  {
+    id: 'mansoura-damietta',
+    slug: 'cairo-mansoura-damietta',
+    nameAr: 'القاهرة – المنصورة – دمياط',
+    nameEn: 'Cairo – Mansoura – Damietta',
+    shortAr: 'خط الدقهلية ودمياط',
+    shortEn: 'Dakahlia & Damietta',
+    color: '#C2185B',
+    regionAr: 'شرق الدلتا',
+    regionEn: 'East Delta',
+    descriptionAr:
+      'خط خدمي كثيف يربط القاهرة ببنها والزقازيق والمنصورة وطلخا ثم دمياط. يشهد طلبًا كبيرًا من الطلاب والموظفين، وتتوفر عليه درجات مكيفة واقتصادية.',
+    descriptionEn:
+      'A busy commuter corridor linking Cairo with Banha, Zagazig, Mansoura, Talkha and Damietta, with strong demand from students and workers across AC and economical classes.',
+    stationIds: ['cairo-ramses', 'banha', 'zagazig', 'mansoura', 'talkha', 'damietta'],
+    seasonal: false,
+    sortOrder: 7,
+  },
+  {
+    id: 'delta-north',
+    slug: 'cairo-kafr-el-sheikh-damietta',
+    nameAr: 'القاهرة – المحلة – كفر الشيخ – دمياط',
+    nameEn: 'Cairo – Mahalla – Kafr El Sheikh – Damietta',
+    shortAr: 'شمال الدلتا',
+    shortEn: 'North Delta',
+    color: '#6D4C41',
+    regionAr: 'شمال الدلتا',
+    regionEn: 'North Delta',
+    descriptionAr:
+      'مسار طويل عبر بنها وطنطا وسمنود والمحلة الكبرى وكفر الشيخ ودسوق وصولًا إلى دمياط. رحلات أقل تكرارًا لكنها تخدم مدنًا لا تغطيها خطوط الدلتا الرئيسية.',
+    descriptionEn:
+      'A longer route via Banha, Tanta, Samannoud, Mahalla El Kubra, Kafr El Sheikh and Desouk to Damietta. Less frequent, but it reaches towns the main Delta lines do not cover.',
+    stationIds: [
+      'cairo-ramses',
+      'banha',
+      'tanta',
+      'samannoud',
+      'mahalla',
+      'kafr-el-sheikh',
+      'desouk',
+      'damietta',
+    ],
+    seasonal: false,
+    sortOrder: 8,
+  },
+  {
+    id: 'matrouh',
+    slug: 'alexandria-matrouh',
+    nameAr: 'الإسكندرية – مرسى مطروح (موسمي)',
+    nameEn: 'Alexandria – Marsa Matrouh (seasonal)',
+    shortAr: 'خط الساحل الصيفي',
+    shortEn: 'North Coast',
+    color: '#455A64',
+    regionAr: 'الساحل الشمالي',
+    regionEn: 'North Coast',
+    descriptionAr:
+      'خط موسمي يعمل صيفًا بين الإسكندرية والساحل الشمالي حتى مرسى مطروح، ويتوقف في العلمين والضبعة. خارج الموسم لا تسير عليه رحلات منتظمة، ويظهر للمستخدم تنبيه واضح بذلك.',
+    descriptionEn:
+      'A summer-only line along the North Coast from Alexandria to Marsa Matrouh via El Alamein and El Dabaa. Outside the season no regular services run, and the UI says so explicitly.',
+    stationIds: ['alexandria-misr', 'alexandria-sidi-gaber', 'el-alamein', 'sidi-abdel-rahman', 'el-dabaa', 'matrouh'],
+    seasonal: true,
+    season: { startMonth: 6, startDay: 1, endMonth: 9, endDay: 30 },
+    sortOrder: 9,
+  },
+];
+
+export const LINE_MAP: Record<string, RailLine> = Object.fromEntries(
+  LINES.map((line) => [line.id, line]),
+);
+
+export const LINE_BY_SLUG: Record<string, RailLine> = Object.fromEntries(
+  LINES.map((line) => [line.slug, line]),
+);
+
+export function getLine(id: string): RailLine | undefined {
+  return LINE_MAP[id];
+}
+
+export function getLineBySlug(slug: string): RailLine | undefined {
+  return LINE_BY_SLUG[slug];
+}

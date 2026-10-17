@@ -1,0 +1,11 @@
+# Rakeb worker schedules (cron, server timezone UTC).
+# Replace the command with the container entrypoint in production.
+
+# Timetable feeds every five minutes; writes pending overrides only.
+*/5 * * * *  cd /srv/rakeb && RAKEB_WORKER_SOURCE=partner-feed npm run worker:sync -- --once
+
+# Daily staleness sweep: re-verify services whose last confirmation is oldest.
+15 3 * * *   cd /srv/rakeb && npm run worker:sync -- --once
+
+# Weekly sitemap/canonical audit (checks NEXT_PUBLIC_SITE_URL and route coverage).
+0 4 * * 1    cd /srv/rakeb && npm run smoke
