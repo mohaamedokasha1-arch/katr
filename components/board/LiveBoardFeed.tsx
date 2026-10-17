@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { Radio } from 'lucide-react';
 import type { BoardRow, Locale } from '@/types/rail';
 import { BoardTable } from '@/components/board/BoardTable';
@@ -34,6 +35,7 @@ export function LiveBoardFeed({
   dense?: boolean;
 }) {
   const ar = locale === 'ar';
+  const router = useRouter();
   const [rows, setRows] = useState<BoardRow[]>(initialRows);
   const [connection, setConnection] = useState<Connection>('connecting');
   const [lastUpdate, setLastUpdate] = useState<Date | null>(null);
@@ -43,6 +45,14 @@ export function LiveBoardFeed({
   useEffect(() => {
     setRows(initialRows);
   }, [initialRows]);
+
+  // If the stream is unavailable, fall back to the server-rendered snapshot
+  // refreshed by the router — never leave a frozen board on screen.
+  useEffect(() => {
+    if (connection !== 'polling') return;
+    const timer = window.setInterval(() => router.refresh(), 45_000);
+    return () => window.clearInterval(timer);
+  }, [connection, router]);
 
   useEffect(() => {
     mounted.current = true;
