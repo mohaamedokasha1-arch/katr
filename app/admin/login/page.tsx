@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { getLocale } from '@/lib/locale';
-import { demoCredentials } from '@/lib/auth';
+import { adminConfigured } from '@/lib/auth';
 import { LoginForm } from '@/components/admin/LoginForm';
 import { Brand } from '@/components/layout/Brand';
 
@@ -17,13 +17,7 @@ export default async function AdminLoginPage({ searchParams }: { searchParams: S
   const locale = await getLocale();
   const ar = locale === 'ar';
   const { next } = await searchParams;
-  const credentials = demoCredentials().map((entry) => ({
-    role: entry.role,
-    email: entry.email,
-    password: entry.password,
-    labelAr: entry.labelAr,
-    labelEn: entry.labelEn,
-  }));
+  const configured = adminConfigured();
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-night text-white">
@@ -38,7 +32,7 @@ export default async function AdminLoginPage({ searchParams }: { searchParams: S
           </Link>
         </div>
         <div className="rounded-2xl bg-mist p-2">
-          <LoginForm locale={locale} next={next ?? '/admin'} credentials={credentials} />
+          <LoginForm locale={locale} next={next ?? '/admin'} configured={configured} />
         </div>
         <p className="mt-4 text-center text-[10px] text-brand-100/40">
           {ar

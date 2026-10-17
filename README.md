@@ -19,7 +19,7 @@ PostgreSQL + Redis.
 
 ```bash
 npm install
-cp .env.example .env.local     # optional: change the demo secrets
+cp .env.example .env.local     # then fill in your OWN secrets (see Admin access below)
 npm run dev                    # http://localhost:3000
 ```
 
@@ -34,12 +34,15 @@ npm run smoke        # HTTP smoke test, requires a running server
 npm run worker:sync  # background sync worker (see below)
 ```
 
-### Demo admin
+### Admin access (secure setup)
 
-| Role | Email | Password |
-| --- | --- | --- |
-| Data manager (approve / publish) | `admin@rakeb.app` | `Rakeb#2026` |
-| Data editor (draft changes) | `editor@rakeb.app` | `Rakeb#2026` |
+Admin accounts are configured **only** via server-side environment
+variables (`RAKEB_ADMIN_EMAIL` / `RAKEB_ADMIN_PASSWORD`,
+`RAKEB_EDITOR_EMAIL` / `RAKEB_EDITOR_PASSWORD`, plus a 32+ character
+`RAKEB_AUTH_SECRET`). There are no default or demo credentials in code,
+and the sign-in page never displays credentials. If the variables are
+unset, admin sign-in stays disabled (fail closed). See
+`docs/OPERATIONS.md` for the full setup/rotation procedure.
 
 `/admin` is protected by `middleware.ts` and an HMAC-signed, httpOnly cookie
 with an 8-hour lifetime. Credentials and the signing secret come from `.env`.

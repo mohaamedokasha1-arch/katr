@@ -51,6 +51,7 @@ import { buttonClasses } from '@/components/ui/Button';
 import { EmptyState } from '@/components/ui/EmptyState';
 import { Timeline } from '@/components/trip/Timeline';
 import { FareTable } from '@/components/trip/FareTable';
+import { OFFICIAL_BOOKING_URL } from '@/lib/data/sources';
 import { ConfidenceExplainer } from '@/components/trip/ConfidenceExplainer';
 import { ReportPanel } from '@/components/trip/ReportPanel';
 import { DepartureCountdown, LastUpdated, LiveRefresher } from '@/components/trip/LiveBits';
@@ -344,6 +345,14 @@ export default async function TripPage({
                 ? 'راكب لا يبيع تذاكر. الأسعار نطاقات تقديرية مبنية على المسافة والدرجة، وقد تختلف عن السعر الرسمي وقت الحجز.'
                 : 'Rakeb does not sell tickets. Fares are estimated ranges based on distance and class, and may differ from the official price at booking.'}
             </p>
+            <a
+              href={OFFICIAL_BOOKING_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-2 inline-flex text-[11px] font-semibold text-brand-700 underline-offset-2 hover:underline dark:text-brand-300"
+            >
+              {ar ? 'الحجز الرسمي عبر سكك حديد مصر (ENR) ↗' : 'Official booking via Egyptian National Railways (ENR) ↗'}
+            </a>
           </section>
 
           {service.notesAr || service.notesEn || service.features.length > 0 ? (

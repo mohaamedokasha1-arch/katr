@@ -51,25 +51,13 @@ export interface TripStatusArgs {
   reports?: CrowdReport[];
 }
 
-function platformFor(service: Service, stationId: string, date: string): string {
-  const station = STATION_MAP[stationId];
-  const max = station && station.tier <= 2 ? 8 : 4;
-  const value = 1 + (hashString(`${service.number}:${stationId}:${date}`) % max);
-  return String(value);
-}
+// NOTE: platform numbers are NOT fabricated. No verified platform source
+// exists yet, so BoardRow.platform stays undefined and the UI shows '—'
+// until a real source/admin entry provides one.
 
-function sensorDelay(
-  service: Service,
-  originDate: string,
-  departureAbs: number,
-  nowAbs: number,
-): number {
-  const distance = departureAbs - nowAbs;
-  if (distance > 240 || distance < -240) return 0;
-  const seed = hashString(`${service.number}:${originDate}:live`);
-  if (seed % 100 >= 18) return 0;
-  return 5 + (seed % 26);
-}
+// NOTE: there is intentionally NO synthetic/'sensor' delay. Delays come
+// only from (a) human-reviewed published overrides or (b) confirmed rider
+// consensus. A hash of the train number is not an observation.
 
 function buildConfidence(args: {
   service: Service;
@@ -172,11 +160,8 @@ export function getTripStatus(args: TripStatusArgs): StatusResult {
       : 0;
   const communityDelay =
     !cancellation && !officialDelay && consensus.confirmed ? consensus.delayMinutes : 0;
-  const sensor =
-    !cancellation && !officialDelay && !communityDelay
-      ? sensorDelay(service, originDate, departureAbs, nowAbs)
-      : 0;
-  const delayMinutes = cancellation ? 0 : officialDelay || communityDelay || sensor;
+  const sensor = 0; // kept for confidence-shape compatibility; always 0 (no fake live feed)
+  const delayMinutes = cancellation ? 0 : officialDelay || communityDelay;
 
   let kind: LiveStatusKind;
   if (cancellation) {
@@ -203,13 +188,7 @@ export function getTripStatus(args: TripStatusArgs): StatusResult {
       active.find((override) => override.type === 'schedule_change') ??
       null);
 
-  const showPlatform =
-    !cancellation &&
-    (kind === 'boarding' || kind === 'delayed' || kind === 'in_transit') &&
-    Math.abs(departureAbs - nowAbs) <= 6 * 60;
-  const platform = showPlatform
-    ? platformFor(service, fromStop.stationId, originDate)
-    : undefined;
+  const platform: string | undefined = undefined; // no verified platform source yet
 
   const confidence = buildConfidence({
     service,
@@ -227,18 +206,14 @@ export function getTripStatus(args: TripStatusArgs): StatusResult {
       ? delayOverride?.reasonAr
       : communityDelay > 0
         ? `تأكيد مجتمعي من ${consensus.uniqueReporters} ركاب على تأخير ${communityDelay} دقيقة.`
-        : sensor > 0
-          ? 'تأخير مرصود آليًا من طبقة التزامن.'
-          : undefined;
+        : undefined;
   const noteEn = cancellation
     ? decision.cancellationReasonEn
     : officialDelay > 0
       ? delayOverride?.reasonEn
       : communityDelay > 0
         ? `Community confirmation from ${consensus.uniqueReporters} riders for a ${communityDelay}-minute delay.`
-        : sensor > 0
-          ? 'Delay observed automatically by the sync layer.'
-          : undefined;
+        : undefined;
 
   const updatedAtIso = cancellation || officialDelay > 0
     ? (official?.reviewedAt ?? official?.createdAt ?? now.toISOString())
@@ -375,7 +350,7 @@ export function getStationBoard(options: BoardOptions): StationBoard {
         confidence: resolved.confidence,
         platform:
           resolved.status.platform ??
-          (decision.cancelled ? undefined : platformFor(service, station.id, originDate)),
+          undefined, // platform unknown — never fabricated
         sortKey: abs,
       };
       rows.push(row);

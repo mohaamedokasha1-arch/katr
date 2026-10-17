@@ -10,8 +10,11 @@ import { unique } from '@/lib/utils';
 export function CoverageSection({ locale }: { locale: Locale }) {
   const ar = locale === 'ar';
   const governorates = unique(STATIONS.map((station) => station.governorateAr)).length;
+  // Single definition everywhere: "searchable stations" = tier < 4.
+  // Total registered stations (incl. non-searchable halts) is shown on /about.
+  const searchable = STATIONS.filter((station) => station.searchable).length;
   const stats = [
-    { value: STATIONS.length, labelAr: 'محطة', labelEn: 'stations', icon: MapPin },
+    { value: searchable, labelAr: 'محطة قابلة للبحث', labelEn: 'searchable stations', icon: MapPin },
     { value: LINES.length, labelAr: 'خط', labelEn: 'lines', icon: Route },
     { value: SERVICES.length, labelAr: 'رحلة يومية', labelEn: 'daily services', icon: TrainFront },
     { value: governorates, labelAr: 'محافظة', labelEn: 'governorates', icon: CalendarRange },

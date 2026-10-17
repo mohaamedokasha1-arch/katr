@@ -528,7 +528,7 @@ export const STATIONS: Station[] = [
     lat: 30.6043,
     lng: 32.2715,
     tier: 2,
-    lineIds: ['canal-port-said'],
+    lineIds: ['sinai', 'canal-port-said'],
     aliasesAr: ['الإسماعيلية', 'الاسماعيلية', 'اسماعيلية'],
     aliasesEn: ['Ismailia', 'Ismailiya'],
   }),
@@ -718,6 +718,194 @@ export const STATIONS: Station[] = [
     descriptionEn:
       'The North Coast terminus of the seasonal summer line; regular trains do not serve it outside the summer season.',
   }),
+  // ── Expansion 2026-10-17: documented stations on existing corridors.
+  // Schedules for these stations are NOT yet verified in Rakeb: they are
+  // listed with their line/governorate, and their pages state that detailed
+  // times are unavailable instead of inventing trips.
+  station({
+    id: 'shubra-el-kheima', code: 'SHB', nameAr: 'شبرا الخيمة', nameEn: 'Shubra El Kheima',
+    governorateAr: 'القليوبية', governorateEn: 'Qalyubia', lat: 30.1286, lng: 31.2422, tier: 2,
+    lineIds: ['delta-main', 'menouf'],
+    aliasesAr: ['شبرا الخيمة', 'شبرا'], aliasesEn: ['Shubra El Kheima', 'Shubra'],
+    descriptionAr: 'محطة رئيسية شمال القاهرة على خط الدلتا. جداول رحلاتها التفصيلية في راكب قيد التحقق حاليًا — لا تُعرض مواعيد مخترعة.',
+    descriptionEn: 'Major station north of Cairo on the Delta line. Detailed schedules in Rakeb are still being verified — no invented times are shown.',
+  }),
+  station({
+    id: 'qalyub', code: 'QLB', nameAr: 'قليوب', nameEn: 'Qalyub',
+    governorateAr: 'القليوبية', governorateEn: 'Qalyubia', lat: 30.1942, lng: 31.2075, tier: 3,
+    lineIds: ['delta-main', 'menouf'],
+    aliasesAr: ['قليوب'], aliasesEn: ['Qalyub', 'Kalyoub'],
+    descriptionAr: 'محطة على خط الدلتا وخط منوف شمال القاهرة. جداول رحلاتها التفصيلية قيد التحقق في راكب حاليًا.',
+    descriptionEn: 'Station on the Delta and Menouf lines north of Cairo. Detailed schedules are still being verified in Rakeb.',
+  }),
+  station({
+    id: 'qwesna', code: 'QWS', nameAr: 'قويسنا', nameEn: 'Qwesna',
+    governorateAr: 'المنوفية', governorateEn: 'Monufia', lat: 30.5636, lng: 31.1553, tier: 3,
+    lineIds: ['delta-main'],
+    aliasesAr: ['قويسنا'], aliasesEn: ['Qwesna', 'Quesna'],
+    descriptionAr: 'محطة محافظة المنوفية على خط القاهرة–الإسكندرية بين بنها وبركة السبع. جداول رحلاتها التفصيلية قيد التحقق في راكب حاليًا.',
+    descriptionEn: 'Monufia station on the Cairo–Alexandria line between Banha and Berket El Sabaa. Detailed schedules are still being verified in Rakeb.',
+  }),
+  station({
+    id: 'berket-el-sabaa', code: 'BKS', nameAr: 'بركة السبع', nameEn: 'Berket El Sabaa',
+    governorateAr: 'المنوفية', governorateEn: 'Monufia', lat: 30.6347, lng: 31.0889, tier: 3,
+    lineIds: ['delta-main'],
+    aliasesAr: ['بركة السبع'], aliasesEn: ['Berket El Sabaa', 'Birkat as Sab'],
+    descriptionAr: 'محطة محافظة المنوفية على خط القاهرة–الإسكندرية قبل طنطا. جداول رحلاتها التفصيلية قيد التحقق في راكب حاليًا.',
+    descriptionEn: 'Monufia station on the Cairo–Alexandria line before Tanta. Detailed schedules are still being verified in Rakeb.',
+  }),
+  station({
+    id: 'menouf', code: 'MNF', nameAr: 'منوف', nameEn: 'Menouf',
+    governorateAr: 'المنوفية', governorateEn: 'Monufia', lat: 30.4660, lng: 30.9310, tier: 2,
+    lineIds: ['menouf'],
+    aliasesAr: ['منوف'], aliasesEn: ['Menouf', 'Minuf'],
+    descriptionAr: 'محطة رئيسية على خط منوف بين القاهرة وشبين الكوم وطنطا. جداول رحلاتها التفصيلية قيد التحقق في راكب حاليًا.',
+    descriptionEn: 'Main station on the Menouf line between Cairo, Shebin El Kom and Tanta. Detailed schedules are still being verified in Rakeb.',
+  }),
+  station({
+    id: 'shebin-el-kom', code: 'SBK', nameAr: 'شبين الكوم', nameEn: 'Shebin El Kom',
+    governorateAr: 'المنوفية', governorateEn: 'Monufia', lat: 30.5590, lng: 31.0100, tier: 2,
+    lineIds: ['menouf'],
+    aliasesAr: ['شبين الكوم', 'شبين'], aliasesEn: ['Shebin El Kom', 'Shibin El Kom'],
+    descriptionAr: 'محطة عاصمة محافظة المنوفية على خط منوف. جداول رحلاتها التفصيلية قيد التحقق في راكب حاليًا.',
+    descriptionEn: 'Station of the Monufia capital on the Menouf line. Detailed schedules are still being verified in Rakeb.',
+  }),
+  station({
+    id: 'itay-el-barud', code: 'ITB', nameAr: 'إيتاي البارود', nameEn: 'Itay El Barud',
+    governorateAr: 'البحيرة', governorateEn: 'Beheira', lat: 30.8869, lng: 30.6636, tier: 3,
+    lineIds: ['delta-main'],
+    aliasesAr: ['إيتاي البارود', 'ايتاي البارود'], aliasesEn: ['Itay El Barud'],
+    descriptionAr: 'محطة محافظة البحيرة على خط الدلتا بين كفر الزيات ودمنهور. جداول رحلاتها التفصيلية قيد التحقق في راكب حاليًا.',
+    descriptionEn: 'Beheira station on the Delta line between Kafr El Zayat and Damanhour. Detailed schedules are still being verified in Rakeb.',
+  }),
+  station({
+    id: 'abu-hommus', code: 'ABH', nameAr: 'أبو حمص', nameEn: 'Abu Hommus',
+    governorateAr: 'البحيرة', governorateEn: 'Beheira', lat: 31.1036, lng: 30.3100, tier: 3,
+    lineIds: ['delta-main'],
+    aliasesAr: ['أبو حمص', 'ابو حمص'], aliasesEn: ['Abu Hommus', 'Abu Hummus'],
+    descriptionAr: 'محطة محافظة البحيرة على خط الدلتا بين دمنهور وكفر الدوار. جداول رحلاتها التفصيلية قيد التحقق في راكب حاليًا.',
+    descriptionEn: 'Beheira station on the Delta line between Damanhour and Kafr El Dawwar. Detailed schedules are still being verified in Rakeb.',
+  }),
+  station({
+    id: 'kafr-el-dawwar', code: 'KFD', nameAr: 'كفر الدوار', nameEn: 'Kafr El Dawwar',
+    governorateAr: 'البحيرة', governorateEn: 'Beheira', lat: 31.1317, lng: 30.0061, tier: 2,
+    lineIds: ['delta-main'],
+    aliasesAr: ['كفر الدوار'], aliasesEn: ['Kafr El Dawwar', 'Kafr el-Dawwar'],
+    descriptionAr: 'محطة رئيسية في البحيرة على مدخل الإسكندرية. جداول رحلاتها التفصيلية قيد التحقق في راكب حاليًا.',
+    descriptionEn: 'Main Beheira station at the gateway to Alexandria. Detailed schedules are still being verified in Rakeb.',
+  }),
+  station({
+    id: 'el-badrashin', code: 'BDR', nameAr: 'البدرشين', nameEn: 'El Badrashin',
+    governorateAr: 'الجيزة', governorateEn: 'Giza', lat: 29.8519, lng: 31.2753, tier: 3,
+    lineIds: ['upper-egypt'],
+    aliasesAr: ['البدرشين'], aliasesEn: ['El Badrashin', 'Badrashin'],
+    descriptionAr: 'محطة الجيزة على خط الصعيد جنوب الجيزة. جداول رحلاتها التفصيلية قيد التحقق في راكب حاليًا.',
+    descriptionEn: 'Giza station on the Upper Egypt line south of Giza. Detailed schedules are still being verified in Rakeb.',
+  }),
+  station({
+    id: 'el-fashn', code: 'FSH', nameAr: 'الفشن', nameEn: 'El Fashn',
+    governorateAr: 'بني سويف', governorateEn: 'Beni Suef', lat: 28.8231, lng: 30.8994, tier: 3,
+    lineIds: ['upper-egypt'],
+    aliasesAr: ['الفشن'], aliasesEn: ['El Fashn', 'Fashn'],
+    descriptionAr: 'محطة جنوب بني سويف على خط الصعيد. جداول رحلاتها التفصيلية قيد التحقق في راكب حاليًا.',
+    descriptionEn: 'Station south of Beni Suef on the Upper Egypt line. Detailed schedules are still being verified in Rakeb.',
+  }),
+  station({
+    id: 'beni-mazar', code: 'BMZ', nameAr: 'بني مزار', nameEn: 'Beni Mazar',
+    governorateAr: 'المنيا', governorateEn: 'Minya', lat: 28.5083, lng: 30.8011, tier: 3,
+    lineIds: ['upper-egypt'],
+    aliasesAr: ['بني مزار'], aliasesEn: ['Beni Mazar'],
+    descriptionAr: 'محطة شمال المنيا على خط الصعيد. جداول رحلاتها التفصيلية قيد التحقق في راكب حاليًا.',
+    descriptionEn: 'Station north of Minya on the Upper Egypt line. Detailed schedules are still being verified in Rakeb.',
+  }),
+  station({
+    id: 'samalut', code: 'SML', nameAr: 'سمالوط', nameEn: 'Samalut',
+    governorateAr: 'المنيا', governorateEn: 'Minya', lat: 28.3108, lng: 30.7097, tier: 2,
+    lineIds: ['upper-egypt'],
+    aliasesAr: ['سمالوط'], aliasesEn: ['Samalut'],
+    descriptionAr: 'محطة رئيسية في المنيا على خط الصعيد. جداول رحلاتها التفصيلية قيد التحقق في راكب حاليًا.',
+    descriptionEn: 'Main Minya station on the Upper Egypt line. Detailed schedules are still being verified in Rakeb.',
+  }),
+  station({
+    id: 'abu-tig', code: 'ABT', nameAr: 'أبوتيج', nameEn: 'Abu Tig',
+    governorateAr: 'أسيوط', governorateEn: 'Asyut', lat: 27.0453, lng: 31.3286, tier: 3,
+    lineIds: ['upper-egypt'],
+    aliasesAr: ['أبوتيج', 'ابوتيج'], aliasesEn: ['Abu Tig', 'Abutig'],
+    descriptionAr: 'محطة أسيوط على خط الصعيد جنوب أسيوط. جداول رحلاتها التفصيلية قيد التحقق في راكب حاليًا.',
+    descriptionEn: 'Asyut station on the Upper Egypt line south of Asyut. Detailed schedules are still being verified in Rakeb.',
+  }),
+  station({
+    id: 'tahta', code: 'THT', nameAr: 'طهطا', nameEn: 'Tahta',
+    governorateAr: 'سوهاج', governorateEn: 'Sohag', lat: 26.7714, lng: 31.5014, tier: 2,
+    lineIds: ['upper-egypt'],
+    aliasesAr: ['طهطا'], aliasesEn: ['Tahta'],
+    descriptionAr: 'محطة رئيسية في سوهاج على خط الصعيد. جداول رحلاتها التفصيلية قيد التحقق في راكب حاليًا.',
+    descriptionEn: 'Main Sohag station on the Upper Egypt line. Detailed schedules are still being verified in Rakeb.',
+  }),
+  station({
+    id: 'nag-hammadi', code: 'NGH', nameAr: 'نجع حمادي', nameEn: 'Nag Hammadi',
+    governorateAr: 'قنا', governorateEn: 'Qena', lat: 26.0508, lng: 32.2422, tier: 2,
+    lineIds: ['upper-egypt'],
+    aliasesAr: ['نجع حمادي'], aliasesEn: ['Nag Hammadi', 'Nag Hamadi'],
+    descriptionAr: 'محطة رئيسية في قنا على خط الصعيد ونقطة عبور النيل. جداول رحلاتها التفصيلية قيد التحقق في راكب حاليًا.',
+    descriptionEn: 'Main Qena station on the Upper Egypt line and a Nile crossing point. Detailed schedules are still being verified in Rakeb.',
+  }),
+  station({
+    id: 'qus', code: 'QUS', nameAr: 'قوص', nameEn: 'Qus',
+    governorateAr: 'قنا', governorateEn: 'Qena', lat: 25.9153, lng: 32.7631, tier: 3,
+    lineIds: ['upper-egypt'],
+    aliasesAr: ['قوص'], aliasesEn: ['Qus', 'Qos'],
+    descriptionAr: 'محطة قنا على خط الصعيد بين قنا والأقصر. جداول رحلاتها التفصيلية قيد التحقق في راكب حاليًا.',
+    descriptionEn: 'Qena station on the Upper Egypt line between Qena and Luxor. Detailed schedules are still being verified in Rakeb.',
+  }),
+  station({
+    id: 'esna', code: 'ESN', nameAr: 'إسنا', nameEn: 'Esna',
+    governorateAr: 'الأقصر', governorateEn: 'Luxor', lat: 25.2936, lng: 32.5564, tier: 2,
+    lineIds: ['upper-egypt'],
+    aliasesAr: ['إسنا', 'اسنا'], aliasesEn: ['Esna', 'Isna'],
+    descriptionAr: 'محطة رئيسية في الأقصر على خط الصعيد بين الأقصر وإدفو. جداول رحلاتها التفصيلية قيد التحقق في راكب حاليًا.',
+    descriptionEn: 'Main Luxor station on the Upper Egypt line between Luxor and Edfu. Detailed schedules are still being verified in Rakeb.',
+  }),
+  station({
+    id: 'minya-el-qamh', code: 'MQH', nameAr: 'منيا القمح', nameEn: 'Minya El Qamh',
+    governorateAr: 'الشرقية', governorateEn: 'Sharqia', lat: 30.6278, lng: 31.4131, tier: 2,
+    lineIds: ['mansoura-damietta'],
+    aliasesAr: ['منيا القمح'], aliasesEn: ['Minya El Qamh', 'Minya al-Qamh'],
+    descriptionAr: 'محطة رئيسية في الشرقية بين بنها والزقازيق على خط المنصورة. جداول رحلاتها التفصيلية قيد التحقق في راكب حاليًا.',
+    descriptionEn: 'Main Sharqia station between Banha and Zagazig on the Mansoura line. Detailed schedules are still being verified in Rakeb.',
+  }),
+  station({
+    id: 'mit-ghamr', code: 'MTG', nameAr: 'ميت غمر', nameEn: 'Mit Ghamr',
+    governorateAr: 'الدقهلية', governorateEn: 'Dakahlia', lat: 30.7147, lng: 31.2597, tier: 2,
+    lineIds: ['mansoura-damietta'],
+    aliasesAr: ['ميت غمر'], aliasesEn: ['Mit Ghamr'],
+    descriptionAr: 'محطة رئيسية في الدقهلية بين الزقازيق والمنصورة. جداول رحلاتها التفصيلية قيد التحقق في راكب حاليًا.',
+    descriptionEn: 'Main Dakahlia station between Zagazig and Mansoura. Detailed schedules are still being verified in Rakeb.',
+  }),
+  station({
+    id: 'fayid', code: 'FYD', nameAr: 'فايد', nameEn: 'Fayid',
+    governorateAr: 'الإسماعيلية', governorateEn: 'Ismailia', lat: 30.3269, lng: 32.2997, tier: 3,
+    lineIds: ['canal-suez'],
+    aliasesAr: ['فايد'], aliasesEn: ['Fayid', 'Fayed'],
+    descriptionAr: 'محطة الإسماعيلية على خط السويس جنوب الإسماعيلية. جداول رحلاتها التفصيلية قيد التحقق في راكب حاليًا.',
+    descriptionEn: 'Ismailia station on the Suez line south of Ismailia. Detailed schedules are still being verified in Rakeb.',
+  }),
+  station({
+    id: 'el-qantara-sharq', code: 'QNS', nameAr: 'القنطرة شرق', nameEn: 'El Qantara Sharq',
+    governorateAr: 'شمال سيناء', governorateEn: 'North Sinai', lat: 30.8567, lng: 32.3167, tier: 3,
+    lineIds: ['sinai'],
+    aliasesAr: ['القنطرة شرق', 'القنطرة'], aliasesEn: ['El Qantara Sharq', 'Qantara East'],
+    descriptionAr: 'محطة مدخل سيناء شرق قناة السويس على خط سيناء. خدمة الركاب على هذا الخط محدودة وجداولها غير متوفرة في راكب حاليًا — لا تُعرض مواعيد مخترعة.',
+    descriptionEn: 'Sinai gateway station east of the Suez Canal on the Sinai line. Passenger service on this line is limited and schedules are not available in Rakeb yet — no invented times are shown.',
+  }),
+  station({
+    id: 'bir-al-abd', code: 'BAA', nameAr: 'بئر العبد', nameEn: 'Bir Al Abd',
+    governorateAr: 'شمال سيناء', governorateEn: 'North Sinai', lat: 31.0189, lng: 33.0119, tier: 3,
+    lineIds: ['sinai'],
+    aliasesAr: ['بئر العبد'], aliasesEn: ['Bir Al Abd', 'Bir el-Abd'],
+    descriptionAr: 'محطة في شمال سيناء على خط سيناء. خدمة الركاب محدودة وجداولها غير متوفرة في راكب حاليًا — لا تُعرض مواعيد مخترعة.',
+    descriptionEn: 'North Sinai station on the Sinai line. Passenger service is limited and schedules are not available in Rakeb yet — no invented times are shown.',
+  }),
 ];
 
 export const STATION_MAP: Record<string, Station> = Object.fromEntries(
@@ -750,3 +938,42 @@ export const STATION_OPTIONS = STATIONS.map((item) => ({
 export function getStation(id: string): Station | undefined {
   return STATION_MAP[id];
 }
+
+/** All 27 Egyptian governorates and their documented passenger-rail status. */
+export interface GovernorateCoverage {
+  nameAr: string;
+  nameEn: string;
+  railStatus: 'served' | 'limited' | 'none';
+  noteAr: string;
+  noteEn: string;
+}
+
+export const GOVERNORATES: GovernorateCoverage[] = [
+  { nameAr: 'القاهرة', nameEn: 'Cairo', railStatus: 'served', noteAr: 'رمسيس وشبرا الخيمة', noteEn: 'Ramses & Shubra' },
+  { nameAr: 'الجيزة', nameEn: 'Giza', railStatus: 'served', noteAr: 'الجيزة والبدرشين والوراق', noteEn: 'Giza, Badrashin, Warraq' },
+  { nameAr: 'الإسكندرية', nameEn: 'Alexandria', railStatus: 'served', noteAr: 'محطة مصر وسيدي جابر', noteEn: 'Misr & Sidi Gaber' },
+  { nameAr: 'القليوبية', nameEn: 'Qalyubia', railStatus: 'served', noteAr: 'بنها وقليوب وشبرا الخيمة', noteEn: 'Banha, Qalyub, Shubra' },
+  { nameAr: 'المنوفية', nameEn: 'Monufia', railStatus: 'served', noteAr: 'شبين الكوم ومنوف وقويسنا وبركة السبع', noteEn: 'Shebin El Kom, Menouf, Qwesna, Berket El Sabaa' },
+  { nameAr: 'الغربية', nameEn: 'Gharbia', railStatus: 'served', noteAr: 'طنطا والمحلة وكفر الزيات وسمنود', noteEn: 'Tanta, Mahalla, Kafr El Zayat, Samannoud' },
+  { nameAr: 'البحيرة', nameEn: 'Beheira', railStatus: 'served', noteAr: 'دمنهور وكفر الدوار وإيتاي البارود وأبو حمص', noteEn: 'Damanhour, Kafr El Dawwar, Itay, Abu Hommus' },
+  { nameAr: 'كفر الشيخ', nameEn: 'Kafr El Sheikh', railStatus: 'served', noteAr: 'كفر الشيخ ودسوق', noteEn: 'Kafr El Sheikh & Desouk' },
+  { nameAr: 'الدقهلية', nameEn: 'Dakahlia', railStatus: 'served', noteAr: 'المنصورة وميت غمر وطلخا', noteEn: 'Mansoura, Mit Ghamr, Talkha' },
+  { nameAr: 'الشرقية', nameEn: 'Sharqia', railStatus: 'served', noteAr: 'الزقازيق ومنيا القمح وأبو كبير وفاقوس وأبو حماد', noteEn: 'Zagazig, Minya El Qamh, Abu Kabir, Faqous, Abu Hammad' },
+  { nameAr: 'دمياط', nameEn: 'Damietta', railStatus: 'served', noteAr: 'دمياط', noteEn: 'Damietta' },
+  { nameAr: 'الإسماعيلية', nameEn: 'Ismailia', railStatus: 'served', noteAr: 'الإسماعيلية وفايد', noteEn: 'Ismailia & Fayid' },
+  { nameAr: 'بورسعيد', nameEn: 'Port Said', railStatus: 'served', noteAr: 'بورسعيد', noteEn: 'Port Said' },
+  { nameAr: 'السويس', nameEn: 'Suez', railStatus: 'served', noteAr: 'السويس', noteEn: 'Suez' },
+  { nameAr: 'الفيوم', nameEn: 'Fayoum', railStatus: 'served', noteAr: 'الفيوم', noteEn: 'Fayoum' },
+  { nameAr: 'بني سويف', nameEn: 'Beni Suef', railStatus: 'served', noteAr: 'بني سويف والفشن', noteEn: 'Beni Suef & El Fashn' },
+  { nameAr: 'المنيا', nameEn: 'Minya', railStatus: 'served', noteAr: 'المنيا وسمالوط وبني مزار وملوي وأبو قرقاص', noteEn: 'Minya, Samalut, Beni Mazar, Mallawi, Abu Qurqas' },
+  { nameAr: 'أسيوط', nameEn: 'Asyut', railStatus: 'served', noteAr: 'أسيوط وأبوتيج ومنفلوط', noteEn: 'Asyut, Abu Tig, Manfalut' },
+  { nameAr: 'سوهاج', nameEn: 'Sohag', railStatus: 'served', noteAr: 'سوهاج وطهطا وجرجا', noteEn: 'Sohag, Tahta, Girga' },
+  { nameAr: 'قنا', nameEn: 'Qena', railStatus: 'served', noteAr: 'قنا ونجع حمادي وقوص وقفط وفرشوط', noteEn: 'Qena, Nag Hammadi, Qus, Qift, Farshut' },
+  { nameAr: 'الأقصر', nameEn: 'Luxor', railStatus: 'served', noteAr: 'الأقصر وإسنا', noteEn: 'Luxor & Esna' },
+  { nameAr: 'أسوان', nameEn: 'Aswan', railStatus: 'served', noteAr: 'أسوان وكوم أمبو وإدفو ودراو', noteEn: 'Aswan, Kom Ombo, Edfu, Daraw' },
+  { nameAr: 'مطروح', nameEn: 'Matrouh', railStatus: 'served', noteAr: 'مرسى مطروح والعلمين والضبعة (موسمي)', noteEn: 'Marsa Matrouh, Alamein, Dabaa (seasonal)' },
+  { nameAr: 'شمال سيناء', nameEn: 'North Sinai', railStatus: 'limited', noteAr: 'القنطرة شرق وبئر العبد — خدمة محدودة والمواعيد غير متوفرة بعد', noteEn: 'Qantara Sharq & Bir Al Abd — limited service, schedules not yet available' },
+  { nameAr: 'جنوب سيناء', nameEn: 'South Sinai', railStatus: 'none', noteAr: 'لا توجد سكك حديدية للركاب', noteEn: 'No passenger railway' },
+  { nameAr: 'البحر الأحمر', nameEn: 'Red Sea', railStatus: 'none', noteAr: 'لا توجد خدمة قطارات ركاب (خطوط شحن فقط)', noteEn: 'No passenger train service (freight lines only)' },
+  { nameAr: 'الوادي الجديد', nameEn: 'New Valley', railStatus: 'none', noteAr: 'لا توجد خدمة قطارات ركاب مجدولة حاليًا', noteEn: 'No scheduled passenger train service currently' },
+];

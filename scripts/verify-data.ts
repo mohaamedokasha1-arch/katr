@@ -50,6 +50,22 @@ console.log('nextDates empty?', searchTrips({ from: 'cairo-ramses', to: 'matrouh
 const board = getStationBoard({ stationId: 'cairo-ramses', direction: 'departure' });
 console.log('Board rows', board.departures.length, board.departures.slice(0, 3).map((r) => [r.serviceNumber, formatClock(r.scheduledMinutes), r.status.kind]));
 console.log('Overrides', getPublishedOverrides().length, 'runs 1632', getRunDecision(SERVICES.find((s) => s.number === '1632')!, today, getPublishedOverrides()));
+// --- Consistency regressions (audit 2026-10-17) ---
+const r907 = searchTrips({ from: 'cairo-ramses', to: 'alexandria-misr', date: today });
+const t907 = r907.trips.find((x) => x.serviceNumber === '907');
+if (!t907) errors.push('907 missing from Cairo->Alex search');
+else {
+  if (formatClock(t907.departMinutes) !== '14:00') errors.push(`907 scheduled departure drifted: ${formatClock(t907.departMinutes)} (expected 14:00 scheduled; any delay must be separate)`);
+  const ids = r907.trips.map((x) => x.tripId);
+  if (new Set(ids).size !== ids.length) errors.push('Duplicate tripIds in search results');
+  const board907 = getStationBoard({ stationId: 'cairo-ramses', direction: 'departure', now: new Date(`${today}T13:00:00+02:00`) });
+  const b907 = board907.departures.find((x) => x.serviceNumber === '907');
+  if (b907 && formatClock(b907.scheduledMinutes % 1440) !== '14:00') errors.push(`907 board scheduled mismatch: ${formatClock(b907.scheduledMinutes % 1440)}`);
+  console.log('907 check', t907 && formatClock(t907.departMinutes), 'delay', t907?.status.delayMinutes, 'board', b907 && formatClock(b907.scheduledMinutes % 1440));
+}
+// Midnight crossing: a late departure arriving after 24:00 must keep +1 offset
+const late = searchTrips({ from: 'cairo-ramses', to: 'aswan', date: today }).trips.filter((x) => x.arriveDayOffset > x.departDayOffset);
+console.log('overnight trips Cairo->Aswan:', late.length);
 if (errors.length) {
   console.error('ERRORS', errors);
   process.exit(1);

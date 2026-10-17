@@ -6,22 +6,14 @@ import { loginAction, type ActionResult } from '@/app/admin/actions';
 import { SubmitButton } from '@/components/admin/SubmitButton';
 import { cn } from '@/lib/utils';
 
-export interface DemoCredential {
-  role: 'admin' | 'editor';
-  email: string;
-  password: string;
-  labelAr: string;
-  labelEn: string;
-}
-
 export function LoginForm({
   locale,
   next,
-  credentials,
+  configured = true,
 }: {
   locale: 'ar' | 'en';
   next: string;
-  credentials: DemoCredential[];
+  configured?: boolean;
 }) {
   const ar = locale === 'ar';
   const [state, formAction] = useActionState<ActionResult | null, FormData>(loginAction, null);
@@ -29,15 +21,8 @@ export function LoginForm({
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
-  const fill = (role: 'admin' | 'editor') => {
-    const entry = credentials.find((item) => item.role === role);
-    if (!entry) return;
-    setEmail(entry.email);
-    setPassword(entry.password);
-  };
-
   return (
-    <div className="grid gap-4 lg:grid-cols-[1fr_300px]">
+    <div>
       <form action={formAction} className="panel p-5 sm:p-6">
         <input type="hidden" name="next" value={next} />
         <div className="flex items-center gap-2">
@@ -107,44 +92,15 @@ export function LoginForm({
           {ar ? 'دخول' : 'Sign in'}
         </SubmitButton>
 
-        <p className="mt-3 text-[10px] leading-5 text-slate-400">
-          {ar
-            ? 'نسخة تجريبية: الحسابان أدناه للعرض فقط. لا تستخدم كلمات مرور حقيقية هنا.'
-            : 'Demo build: the two accounts below are for review only. Never enter real passwords here.'}
-        </p>
+        {!configured ? (
+          <p className="mt-3 rounded-lg bg-danger-soft px-3 py-2 text-[10px] leading-5 text-danger dark:bg-danger/10 dark:text-red-300">
+            {ar
+              ? 'تسجيل دخول الإدارة غير مُهيأ على الخادم بعد (متغيرات البيئة ناقصة). عمليات الإدارة معطّلة حتى يكمل صاحب المشروع الإعداد الآمن.'
+              : 'Admin sign-in is not configured on the server yet (missing environment variables). Admin operations stay disabled until the owner completes the secure setup.'}
+          </p>
+        ) : null}
       </form>
 
-      <div className="panel p-4">
-        <h2 className="text-xs font-bold text-ink dark:text-white">
-          {ar ? 'حسابات العرض' : 'Demo accounts'}
-        </h2>
-        <div className="mt-2 space-y-2">
-          {credentials.map((entry) => (
-            <button
-              key={entry.role}
-              type="button"
-              onClick={() => fill(entry.role)}
-              className={cn(
-                'w-full rounded-xl border border-slate-200 p-2.5 text-start transition hover:border-brand-300 hover:bg-brand-50/40 dark:border-white/10 dark:hover:border-brand-400/30 dark:hover:bg-white/5',
-              )}
-            >
-              <p className="text-[11px] font-semibold text-ink dark:text-white">
-                {ar ? entry.labelAr : entry.labelEn}
-              </p>
-              <p className="mt-0.5 font-mono text-[9px] text-slate-400">{entry.email}</p>
-              <p className="font-mono text-[9px] text-slate-400">{entry.password}</p>
-              <p className="mt-1 text-[9px] font-semibold text-brand-700 dark:text-brand-300">
-                {ar ? 'اضغط للتعبئة' : 'Tap to fill'}
-              </p>
-            </button>
-          ))}
-        </div>
-        <p className="mt-3 border-t border-slate-100 pt-2 text-[9px] leading-5 text-slate-400 dark:border-white/5">
-          {ar
-            ? 'القاعدة: المحرر ينشئ طلب التعديل، والمدير يعتمده وينشره. النشر الذاتي يُسجَّل كاستثناء في سجل التدقيق.'
-            : 'Rule: an editor drafts a change, a manager approves and publishes it. Self-publishing is recorded as an exception in the audit log.'}
-        </p>
-      </div>
     </div>
   );
 }

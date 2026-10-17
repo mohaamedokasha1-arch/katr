@@ -35,8 +35,29 @@ function hoursAgoIso(now: Date, hours: number): string {
  * a maintenance cancellation tomorrow, and a pending change waiting for a
  * reviewer in the admin console.
  */
+export function demoSeedEnabled(): boolean {
+  return process.env.RAKEB_ENABLE_DEMO_SEED === '1';
+}
+
+/**
+ * Production default: EMPTY state. Fabricated delays, cancellations,
+ * rider reports and sync runs must never be presented as real operations.
+ * They exist only for explicit local review with RAKEB_ENABLE_DEMO_SEED=1.
+ */
 export function buildSeedState(now: Date = new Date()): RuntimeState {
   const today = todayCairo(now);
+  if (!demoSeedEnabled()) {
+    return {
+      version: 1,
+      seedDay: today,
+      overrides: [],
+      reports: [],
+      audit: [],
+      notifications: [],
+      syncRuns: [],
+      stationStatus: {},
+    };
+  }
   const tomorrow = addDays(today, 1);
   const dayAfter = addDays(today, 2);
 
